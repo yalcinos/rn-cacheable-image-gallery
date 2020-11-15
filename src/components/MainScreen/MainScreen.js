@@ -3,7 +3,7 @@ import { Container, Content, Text, Grid } from "native-base";
 import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import HeaderContainer from "../Header/HeaderContainer";
 import { fetchImagesFromAPI } from "../../apis/api";
-import { View, Dimensions, StyleSheet, Platform } from "react-native";
+import { View, Dimensions, StyleSheet, Platform, Image } from "react-native";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -11,7 +11,7 @@ export const MainScreen = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const carouselRef = useRef(null);
-  console.log(images);
+  // console.log(images);
   useEffect(() => {
     fetchImages();
   }, []);
@@ -20,25 +20,17 @@ export const MainScreen = () => {
     const response = await fetchImagesFromAPI();
     const imageList = response.data;
     setImages(imageList);
-
     if (response !== undefined || response != null) {
       setIsLoading(false);
+      return;
     }
   };
 
-  const renderItem = ({ item, index }, parallaxProps) => {
+  const renderItem = ({ item, index }) => {
     return (
       <View style={styles.item}>
-        <ParallaxImage
-          source={{ uri: item.url }}
-          containerStyle={styles.imageContainer}
-          style={styles.image}
-          parallaxFactor={0.4}
-          {...parallaxProps}
-        />
-        <Text style={styles.title} numberOfLines={2}>
-          {item.title}
-        </Text>
+        <Image style={styles.image} source={{ uri: item.url }} />
+        <Text style={styles.title}>{item.title}</Text>
       </View>
     );
   };
@@ -55,7 +47,6 @@ export const MainScreen = () => {
             itemWidth={screenWidth - 60}
             data={images}
             renderItem={renderItem}
-            hasParallaxImages={true}
           />
         </Grid>
       </Content>
@@ -73,16 +64,21 @@ const styles = StyleSheet.create({
   item: {
     width: screenWidth - 60,
     height: screenWidth - 60,
+    borderRadius: 20,
   },
   imageContainer: {
     flex: 1,
-    marginBottom: Platform.select({ ios: 0, android: 1 }), // Prevent a random Android rendering issue
+    // Prevent a random Android rendering issue
+    marginBottom: Platform.select({ ios: 0, android: 1 }),
     backgroundColor: "white",
     borderRadius: 8,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: "cover",
+    overflow: "hidden",
+    borderRadius: 20,
+    borderWidth: 1,
   },
   gridItem: {
     alignItems: "center",
@@ -91,9 +87,8 @@ const styles = StyleSheet.create({
       width: 0,
       height: 15,
     },
-    shadowOpacity: 0.25,
+    shadowOpacity: 0.3,
     shadowRadius: 8,
-
     elevation: 30,
   },
   title: {
