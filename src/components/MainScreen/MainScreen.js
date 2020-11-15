@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from "react";
-import { Container, Content, Text, Body } from "native-base";
+import { Container, Content, Text, Grid } from "native-base";
 import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import HeaderContainer from "../Header/HeaderContainer";
 import { fetchImagesFromAPI } from "../../apis/api";
@@ -44,17 +44,22 @@ export const MainScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Carousel
-        ref={carouselRef}
-        sliderWidth={screenWidth}
-        sliderHeight={screenWidth}
-        itemWidth={screenWidth - 60}
-        data={images}
-        renderItem={renderItem}
-        hasParallaxImages={true}
-      />
-    </View>
+    <Container>
+      <HeaderContainer />
+      <Content style={styles.container}>
+        <Grid style={styles.gridItem}>
+          <Carousel
+            ref={carouselRef}
+            sliderWidth={screenWidth}
+            sliderHeight={screenWidth}
+            itemWidth={screenWidth - 60}
+            data={images}
+            renderItem={renderItem}
+            hasParallaxImages={true}
+          />
+        </Grid>
+      </Content>
+    </Container>
   );
 };
 export default MainScreen;
@@ -63,6 +68,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginTop: 100,
+    position: "relative",
   },
   item: {
     width: screenWidth - 60,
@@ -77,5 +83,26 @@ const styles = StyleSheet.create({
   image: {
     ...StyleSheet.absoluteFillObject,
     resizeMode: "cover",
+  },
+  gridItem: {
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 15,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+
+    elevation: 30,
+  },
+  title: {
+    position: "absolute",
+    // margin: "auto",
+    textAlign: "center",
+    width: "100%",
+    bottom: "45%",
+    fontSize: 20,
+    transform: [{ rotate: "45deg" }],
   },
 });
