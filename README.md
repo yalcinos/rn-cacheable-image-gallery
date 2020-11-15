@@ -1,3 +1,3 @@
 # yt-image-gallery-app
 
-React Native Image Gallery App
+React Native Image Gallery Application
