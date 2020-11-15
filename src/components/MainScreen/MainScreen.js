@@ -4,6 +4,7 @@ import Carousel, { ParallaxImage } from "react-native-snap-carousel";
 import HeaderContainer from "../Header/HeaderContainer";
 import { fetchImagesFromAPI } from "../../apis/api";
 import { View, Dimensions, StyleSheet, Platform, Image } from "react-native";
+import CachedImage from "./CachedImage";
 
 const { width: screenWidth } = Dimensions.get("window");
 
@@ -29,7 +30,7 @@ export const MainScreen = () => {
   const renderItem = ({ item, index }) => {
     return (
       <View style={styles.item}>
-        <Image style={styles.image} source={{ uri: item.url }} />
+        <CachedImage style={styles.image} uri={item.url} />
         <Text style={styles.title}>{item.title}</Text>
       </View>
     );
