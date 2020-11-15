@@ -6,7 +6,7 @@ const HeaderContainer = () => {
   return (
     <Header style={styles.container}>
       <Body>
-        <Title>Image asds</Title>
+        <Title>Image App</Title>
       </Body>
     </Header>
   );
