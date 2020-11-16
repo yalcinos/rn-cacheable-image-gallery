@@ -25,9 +25,9 @@ Also, I used [prettier](https://prettier.io/) plugin for formatting my code.
 
 - `expo start or npm start`
 
-## Used Platform
+## Used Platform - IOS
 
-I have tested the app in Iphone 11 pro and Iphone SE - 2nd generation - API14 emulator to test my app.
+I have tested the app in Iphone 11 pro and Iphone SE - 2nd generation - API14 emulators.
 
 ## Testing
 
