@@ -4,15 +4,20 @@ import shorthash from "shorthash";
 //https://docs.expo.io/versions/latest/sdk/filesystem/
 import * as FileSystem from "expo-file-system";
 
-const CachedImage = (props) => {
+const CachedImage = ({ style, uri, reRender }) => {
   const [source, setSource] = useState({});
+
+  //reRender is a state which is controlled by mainScreen.js for re-rendering images.
   useEffect(() => {
     cacheCheck();
-  }, []);
+  }, [reRender]);
 
+  /*
+   * This function check is image cached. If it is already cached, it will take from cache and render.
+   * If it is not in the cache. It will upload to the cache store.
+   */
   const cacheCheck = async () => {
-    const { uri } = props;
-    //shortash generate unique has id for long uri path.
+    //shortash generate unique hashid for long uri path.
     const shortName = shorthash.unique(uri);
     console.log(shortName);
 
@@ -27,12 +32,12 @@ const CachedImage = (props) => {
       return;
     }
     console.log("downloading image to cache");
-    //Add to cache
+    //Downloading to cache
     const newImage = await FileSystem.downloadAsync(uri, path);
     const newUri = newImage.uri;
     setSource({ uri: newUri });
   };
 
-  return <Image style={props.style} source={source} />;
+  return <Image style={style} source={source} />;
 };
 export default CachedImage;
