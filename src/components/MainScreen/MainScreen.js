@@ -85,7 +85,7 @@ export const MainScreen = () => {
         {/* If I shuffle 5000 images at the same time, sometimes I get call Maximum call stack size exceeded error.
         Because recursive function is working 5000 times and it causes stack overflow.
         I have tried to use setTimeout and Promise for using the event loop to store function in the event queue but this time app was frozen. 
-        So, I decided to splice the array into smaller part. */}
+        So, I decided to slice the array into a smaller piece. But If you wanna test it out you can remove comment for second button tag */}
         <Button
           style={styles.randomButton}
           onPress={() => randomImageList(images.slice(0, 1000), 1000)}
