@@ -43,8 +43,8 @@ export const MainScreen = () => {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = tempValue;
 
+    //Recursive function:Call itself until iterate over all array.
     while (0 !== currentIndex) {
-      //Call itself until every elements is mixed.
       return randomImageList(array, currentIndex);
     }
     setImages(array);
@@ -67,7 +67,11 @@ export const MainScreen = () => {
     );
   };
 
-  return (
+  return isLoading === true ? (
+    <Content>
+      <Text>Loading...</Text>
+    </Content>
+  ) : (
     <Container>
       <HeaderContainer />
       <Content style={styles.container}>
@@ -81,15 +85,18 @@ export const MainScreen = () => {
             renderItem={renderItem}
           />
         </Grid>
-        {/* If I shuffle 5000 images at the same time, sometimes I got call stack size exceeded error.
-        Because recursive function was working 5000 times and it caused stack over flow.
-        I have tried to use setTimeout and Promise for using the event loop to get items from the event queue but this time app was frozen. 
-        So, I decided to splice the array into smaller part  */}
-        {/* <Button onPress={() => randomImageList(images, images.length)}> */}
+        {/* If I shuffle 5000 images at the same time, sometimes I get call stack size exceeded error.
+        Because recursive function is working 5000 times and it causes stack overflow.
+        I have tried to use setTimeout and Promise for using the event loop to store function in the event queue but this time app was frozen. 
+        So, I decided to splice the array into smaller part. */}
         <Button
           style={styles.randomButton}
           onPress={() => randomImageList(images.slice(0, 1000), 1000)}
         >
+          {/* <Button
+          style={styles.randomButton}
+          onPress={() => randomImageList(images, images.length)}
+        > */}
           <Text style={styles.buttonText}>Random Order</Text>
         </Button>
       </Content>
