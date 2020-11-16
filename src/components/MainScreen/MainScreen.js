@@ -11,7 +11,6 @@ const { width: screenWidth } = Dimensions.get("window");
 export const MainScreen = () => {
   const [images, setImages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
   const [reRenderImage, setReRenderImage] = useState(false);
   const carouselRef = useRef(null);
 
@@ -28,9 +27,8 @@ export const MainScreen = () => {
       return;
     }
   };
-
   /*
-   * This function shuffle array of image and update state
+   * This recursive function shuffle array of image and update state
    */
   const randomImageList = (array, currentIndex) => {
     let tempValue, randomIndex;
@@ -50,7 +48,6 @@ export const MainScreen = () => {
     setImages(array);
     //I created this state because, when clicking the button, it will re-render the CachedImage(child) component
     setReRenderImage(!reRenderImage);
-    // return array;
   };
 
   const renderItem = ({ item, index }) => {
@@ -85,7 +82,7 @@ export const MainScreen = () => {
             renderItem={renderItem}
           />
         </Grid>
-        {/* If I shuffle 5000 images at the same time, sometimes I get call stack size exceeded error.
+        {/* If I shuffle 5000 images at the same time, sometimes I get call Maximum call stack size exceeded error.
         Because recursive function is working 5000 times and it causes stack overflow.
         I have tried to use setTimeout and Promise for using the event loop to store function in the event queue but this time app was frozen. 
         So, I decided to splice the array into smaller part. */}

@@ -1,12 +1,12 @@
 import React from "react";
-import { Container, Header, Body, Title } from "native-base";
+import { Header, Body, Title } from "native-base";
 import { StyleSheet } from "react-native";
 
 const HeaderContainer = () => {
   return (
     <Header style={styles.container}>
       <Body>
-        <Title>Image App</Title>
+        <Title>Gallery App</Title>
       </Body>
     </Header>
   );
