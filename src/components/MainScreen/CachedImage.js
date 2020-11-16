@@ -19,7 +19,7 @@ const CachedImage = ({ style, uri, reRender }) => {
   const cacheCheck = async () => {
     //shortash generate unique hashid for long uri path.
     const shortName = shorthash.unique(uri);
-    console.log(shortName);
+    console.log("Image hashed ID:", shortName);
 
     const path = `${FileSystem.cacheDirectory}${shortName}`;
     //Read from cache

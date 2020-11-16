@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { Container, Content, Text, Grid, Button } from "native-base";
-import Carousel, { ParallaxImage } from "react-native-snap-carousel";
+import Carousel from "react-native-snap-carousel";
 import HeaderContainer from "../Header/HeaderContainer";
 import { fetchImagesFromAPI } from "../../apis/api";
 import { View, Dimensions, StyleSheet, Platform, Image } from "react-native";
@@ -32,8 +32,7 @@ export const MainScreen = () => {
   /*
    * This function shuffle array of image and update state
    */
-
-  function randomImageList(array, currentIndex) {
+  const randomImageList = (array, currentIndex) => {
     let tempValue, randomIndex;
     // Generates random number based on array length
     randomIndex = Math.floor(Math.random() * currentIndex);
@@ -44,15 +43,15 @@ export const MainScreen = () => {
     array[currentIndex] = array[randomIndex];
     array[randomIndex] = tempValue;
 
-    //Call itself until every elements is mixed.
     while (0 !== currentIndex) {
+      //Call itself until every elements is mixed.
       return randomImageList(array, currentIndex);
     }
     setImages(array);
     //I created this state because, when clicking the button, it will re-render the CachedImage(child) component
     setReRenderImage(!reRenderImage);
     // return array;
-  }
+  };
 
   const renderItem = ({ item, index }) => {
     return (
@@ -87,8 +86,11 @@ export const MainScreen = () => {
         I have tried to use setTimeout and Promise for using the event loop to get items from the event queue but this time app was frozen. 
         So, I decided to splice the array into smaller part  */}
         {/* <Button onPress={() => randomImageList(images, images.length)}> */}
-        <Button onPress={() => randomImageList(images.slice(0, 100), 100)}>
-          <Text>Random Order</Text>
+        <Button
+          style={styles.randomButton}
+          onPress={() => randomImageList(images.slice(0, 1000), 1000)}
+        >
+          <Text style={styles.buttonText}>Random Order</Text>
         </Button>
       </Content>
     </Container>
@@ -139,5 +141,16 @@ const styles = StyleSheet.create({
     bottom: "45%",
     fontSize: 20,
     transform: [{ rotate: "45deg" }],
+  },
+  randomButton: {
+    marginTop: 30,
+    backgroundColor: "#8bcdcd",
+    marginLeft: "auto",
+    marginRight: "auto",
+    width: "70%",
+    justifyContent: "center",
+  },
+  buttonText: {
+    color: "#000",
   },
 });
