@@ -1,4 +1,4 @@
-# Yalcin Tatar - Cacheable Image Gallery App
+# Cacheable Image Gallery App
 
 ![](assets/screenShots/imageGalleryGif.gif)
 
