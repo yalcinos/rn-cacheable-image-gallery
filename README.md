@@ -31,7 +31,7 @@ I have tested the app in Iphone 11 pro and Iphone SE - 2nd generation - API14 em
 
 ## Testing
 
-I added some console.log() for you to test cache easily.
+I added some console.log() for you to test caching mechanism easily.
 
 - `When you swipe right to see another image you will see this kind of message that indicates the image is cached if it is not in the cache`
 
