@@ -27,29 +27,6 @@ export const MainScreen = () => {
       return;
     }
   };
-  /*
-   * This recursive function shuffle array of image and update state
-   */
-  const randomImageList = (array, currentIndex) => {
-    let tempValue, randomIndex;
-
-    // Generates random number based on array length
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    // Swap with current element
-    tempValue = array[currentIndex];
-    array[currentIndex] = array[randomIndex];
-    array[randomIndex] = tempValue;
-
-    currentIndex -= 1;
-
-    //Recursive function:Call itself until iterate over all array.
-    while (0 !== currentIndex) {
-      return randomImageList(array, currentIndex);
-    }
-    setImages(array);
-    //I created this state because, when clicking the button, it will re-render the CachedImage(child) component
-    setReRenderImage(!reRenderImage);
-  };
 
   const renderItem = ({ item, index }) => {
     return (
@@ -60,7 +37,6 @@ export const MainScreen = () => {
           uri={item.url}
           reRender={reRenderImage}
         />
-        <Text style={styles.title}>{item.title}</Text>
       </View>
     );
   };
@@ -83,12 +59,6 @@ export const MainScreen = () => {
             renderItem={renderItem}
           />
         </Grid>
-        <Button
-          style={styles.randomButton}
-          onPress={() => randomImageList(images.slice(0, 1000), 1000)}
-        >
-          <Text style={styles.buttonText}>Random Order</Text>
-        </Button>
       </Content>
     </Container>
   );
@@ -98,7 +68,7 @@ export default MainScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 100,
+    marginTop: 150,
     position: "relative",
   },
   item: {
@@ -130,24 +100,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 30,
-  },
-  title: {
-    position: "absolute",
-    textAlign: "center",
-    width: "100%",
-    bottom: "45%",
-    fontSize: 20,
-    transform: [{ rotate: "45deg" }],
-  },
-  randomButton: {
-    marginTop: 30,
-    backgroundColor: "#8bcdcd",
-    marginLeft: "auto",
-    marginRight: "auto",
-    width: "70%",
-    justifyContent: "center",
-  },
-  buttonText: {
-    color: "#000",
   },
 });
