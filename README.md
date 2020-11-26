@@ -2,11 +2,11 @@
 
 ![](assets/screenShots/imageGalleryGif.gif)
 
-I used [Expo init](https://docs.expo.io/get-started/create-a-new-app/) to create the skeleton of the structure.
+This project was created with [Expo init](https://docs.expo.io/get-started/create-a-new-app/) to create the skeleton of the structure.
 
 ## Libraries & Packages
 
-I used these libraries and packages to develop this app;
+  these libraries and packages was used to develop this app;
 
 - [NativeBaseUI](https://nativebase.io/) for design.
 - [axios](https://www.npmjs.com/package/axios) for fetching data from API
@@ -24,10 +24,6 @@ Also, I used [prettier](https://prettier.io/) plugin for formatting my code.
 ## Run the App
 
 - `expo start or npm start`
-
-## Used Platform - IOS
-
-I have tested the app in Iphone 11 pro and Iphone SE - 2nd generation - API14 emulators.
 
 ## Testing
 
